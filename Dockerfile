@@ -1,9 +1,10 @@
 FROM cimg/android:2023.12.1
 
-workdir /app
+USER circleci
 
-COPY . .
+WORKDIR /home/circleci/project
 
-RUN chmod +x gradlew
-RUN ./gradlew build
+COPY --chown=circleci:circleci . .
+
+RUN bash ./gradlew build
 
